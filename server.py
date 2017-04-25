@@ -20,7 +20,7 @@ def test_message(message):
 
 @socketio.on('connect', namespace='/test')
 def test_connect(message):
-    emit('my response', {'data': message['data'])
+    emit('my response', {'data': message['data'})
 
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
