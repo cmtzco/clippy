@@ -9,7 +9,7 @@
             namespace = '/test';
             var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
             socket.on('my response', function (msg) {
-                $('#log').append('<p>' + msg.data + '</p>');
+                $('#log').val(msg.data);
             });
             $('form#emit').submit(function (event) {
                 socket.emit('my event', {data: $('#emit_data').val()});
