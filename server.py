@@ -26,7 +26,7 @@ def test_message(message):
 
 @socketio.on('connect', namespace='/test')
 def test_connect():
-    emit('my response', {'data': 'Connected'})
+    emit('my response', {'data': ''})
 
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
@@ -51,4 +51,4 @@ class MyNamespace(Namespace):
 
 
 if __name__ == '__main__':
-    socketio.run(app, port=5555, host='0.0.0.0')
+    socketio.run(app, port=5555, host='0.0.0.0', debug='True')
