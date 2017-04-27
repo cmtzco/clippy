@@ -1,6 +1,7 @@
 $(document).ready(function () {
     namespace = '/test';
-    var socket = io.connect('http://' + document.domain + ':' + location.port + document.location.pathname);
+    // var socket = io.connect('http://' + document.domain + ':' + location.port + document.location.pathname);
+    var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
     socket.on('my response', function (msg) {
         $('#board').val(msg.data);
     });
