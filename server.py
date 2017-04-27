@@ -32,7 +32,7 @@ def test_connect():
 def test_disconnect():
     print('Client disconnected')
 
-class MyNamespace(Namespace):
+class CustomNamespace(Namespace):
 
     def test_message(self, message):
         emit('my response', {'data': message['data']})
