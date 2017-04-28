@@ -7,7 +7,7 @@ import random
 class RoomGenerator:
 
     def __init__(self):
-        self.room_path = 'rooms/'
+        self.room_path = './rooms/'
 
     def id_generator(self, size=6, chars=string.ascii_lowercase + string.digits):
         return ''.join(random.choice(chars) for _ in range(size))
@@ -22,12 +22,14 @@ class RoomGenerator:
     def generate_room(self, id=None):
         if id is None:
             room = self.id_generator()
-            file = open(room, "w+")
+            full_path = "{}{}".format(self.room_path, room)
+            file = open(full_path, "w+")
             file.close()
             return room
         elif id:
             room = self.id_sanitize(id)
-            file = open(room, "w+")
+            full_path = "{}{}".format(self.room_path, room)
+            file = open(full_path, "w+")
             file.close()
             return room
 
