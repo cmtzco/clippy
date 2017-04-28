@@ -1,53 +1,61 @@
-from flask import Flask, render_template
-from flask_socketio import SocketIO, Namespace, emit
+from flask import Flask, render_template, session
+from flask_socketio import SocketIO, Namespace, emit, join_room, leave_room, \
+    close_room, rooms, disconnect
+
 
 async_mode = None
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
+# app.config['threaded'] = True
 socketio = SocketIO(app, async_mode=async_mode) # , async_mode=async_mode
+namespace = '/test'
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html',  async_mode=socketio.async_mode)
 
-@app.route('/<namespace>')
-def workspace(namespace):
-    socketio.on_namespace(CustomNamespace(namespace))
-    return render_template('index.html', async_mode=socketio.async_mode)
+# @app.route('/<namespace>')
+# def workspace(namespace="/test"):
+#     socketio.on_namespace(CustomNamespace(namespace))
+#     return render_template('index.html', async_mode=socketio.async_mode)
 
-@socketio.on('my event', namespace='/test')
+@socketio.on('my event', namespace=namespace)
 def test_message(message):
     emit('my response', {'data': message['data']})
 
-@socketio.on('my broadcast event', namespace='/test')
+@socketio.on('my broadcast event', namespace=namespace)
 def test_message(message):
     emit('my response', {'data': message['data']}, broadcast=True)
 
-@socketio.on('connect', namespace='/test')
+@socketio.on('join', namespace=namespace)
+def join(message):
+    join_room(message['room'])
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    emit('my_response',
+         {'data': message['data'],
+          'count': session['receive_count']})
+
+@socketio.on('connect', namespace=namespace)
 def test_connect():
     emit('my response', {'data': ''})
 
-@socketio.on('disconnect', namespace='/test')
+@socketio.on('disconnect', namespace=namespace)
 def test_disconnect():
     print('Client disconnected')
 
-class CustomNamespace(Namespace):
+# class CustomNamespace(Namespace):
 #
-#     def message(self, message):
-#         emit('my response', {'data': message['data']})
+#     def broadcast(self, message):
+#         emit('my response', {'data': message['data']}, broadcast=True)
 #
 #
-    def broadcast(self, message):
-        emit('my response', {'data': message['data']}, broadcast=True)
-
-
-    def connect(self):
-        emit('my response', {'data': 'Connected'})
-
-
-    def disconnect(self):
-        print('Client disconnected')
+#     def connect(self):
+#         emit('my response', {'data': 'Connected'})
+#
+#
+#     def disconnect(self):
+#         print('Client disconnected')
 
 
 if __name__ == '__main__':
