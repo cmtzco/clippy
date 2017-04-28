@@ -1,6 +1,7 @@
 from flask import Flask, render_template, session
 from flask_socketio import SocketIO, Namespace, emit, join_room, leave_room, \
     close_room, rooms, disconnect
+from room import RoomGenerator
 
 
 async_mode = None
@@ -10,6 +11,9 @@ app.config['SECRET_KEY'] = 'secret!'
 # app.config['threaded'] = True
 socketio = SocketIO(app, async_mode=async_mode) # , async_mode=async_mode
 namespace = '/test'
+rooms = RoomGenerator()
+
+
 
 @app.route('/')
 def index():
@@ -19,6 +23,11 @@ def index():
 # def workspace(namespace="/test"):
 #     socketio.on_namespace(CustomNamespace(namespace))
 #     return render_template('index.html', async_mode=socketio.async_mode)
+
+@app.route('/id/create')
+def room_page():
+    return rooms.generate_room()
+
 
 @socketio.on('my event', namespace=namespace)
 def test_message(message):
