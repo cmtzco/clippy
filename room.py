@@ -2,7 +2,9 @@ import os.path
 import string
 import random
 
-
+# TODO
+# ensure that the class can handle recreating new session ids so that the JS does not have to continually refresh
+# till an ID is found.
 
 class RoomGenerator:
 
@@ -22,10 +24,13 @@ class RoomGenerator:
     def generate_room(self, id=None):
         if id is None:
             room = self.id_generator()
-            full_path = "{}{}".format(self.room_path, room)
-            file = open(full_path, "w+")
-            file.close()
-            return room
+            if self.check_room_id(room):
+                return "This room already exists"
+            else:
+                full_path = "{}{}".format(self.room_path, room)
+                file = open(full_path, "w+")
+                file.close()
+                return room
         elif id:
             room = self.id_sanitize(id)
             full_path = "{}{}".format(self.room_path, room)
