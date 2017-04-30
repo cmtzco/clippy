@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = 'secret!'
 # app.config['threaded'] = True
 socketio = SocketIO(app, async_mode=async_mode) # , async_mode=async_mode
 namespace = '/test'
-rooms = RoomGenerator()
+rooms = Room()
 
 
 
@@ -36,6 +36,7 @@ def test_message(message):
 @socketio.on('my broadcast event', namespace=namespace)
 def test_message(message):
     emit('my response', {'data': message['data']}, broadcast=True)
+    rooms.write_room(message['room'], message['data'])
 
 @socketio.on('join', namespace=namespace)
 def join(message):
