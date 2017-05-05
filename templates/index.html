@@ -1,26 +1,51 @@
-<!DOCTYPE HTML>
+<!-- Edited version of: http://materializecss.com/templates/starter-template/preview.html
+Search for the text "TODO" in this HTML file, to know what changes you should make when you take this project off of Code Pen to run elsewhere.
+-->
 <html>
 <head>
-    <title>Clippy</title>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/index.css') }}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Clippy - Uber for your Clipboard</title>
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.css') }}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="screen,projection"/>
 </head>
 <body>
-    <div id="page-wrap">
-        <section class="content">
-            <span id="heading">
-                <h2>Clippy</h2>
-            </span>
-            <span id="buttons">
-                <button class="button button--clippy button--round-s" id="saveButton"><i class="fa fa-paperclip" aria-hidden="true"></i><span>Save</span></button>
-                <button class="button button--clippy button--round-s" id="copyButton"><i class="fa fa-clipboard" aria-hidden="true"></i><span>Clipboard</span></button>
-                <a href="#"><button class="button button--clippy button--round-s" id="downloadButton"><i class="fa fa-download" aria-hidden="true"></i><span>Download</span></button></a>
-            </span>
-            <textarea cols="200" rows="40" id="board"></textarea>
-        </section>
+    <div class="wrapper">
+        <nav class="light-blue">
+            <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo">Clippy</a>
+                <span class="right hide-on-med-and-down">
+                    Advanced Clippy Link
+                </span>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="section no-pad-bot" id="index-banner">
+                <div class="row right">
+                    <a href="#" id="saveButton" class="btn-large waves-effect waves-light blue"><i class="material-icons left">cloud</i> Save</a>
+                    <a href="#" id="copyButton" class="btn-large waves-effect waves-light blue"><i class="material-icons left">assignment</i> Clipboard</a>
+                    <a href="#" id="downloadButton" class="btn-large waves-effect waves-light blue"><i class="material-icons left">system_update_alt</i> Download</a>
+                </div>
+            </div>
+            <div class="section no-pad-bot" id="index-banner">
+                <div class="row center">
+                    <textarea cols="40" rows="8" id="board"></textarea>
+                </div>
+            </div>
+        </div>
+        <footer class="page-footer light-blue">
+            <div class="footer-copyright">
+                <div class="container">
+                    Made by Chris Martinez and Ivan Lay
+                </div>
+            </div>
+        </footer>
     </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/init.js') }}"></script>
 </body>
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.4.2.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
 </html>

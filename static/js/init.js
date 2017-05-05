@@ -21,14 +21,13 @@ $(document).ready(function () {
         return false;
     });
 
-
     $('#board').change(function (event) {
         socket.emit('my broadcast event', {data: $('#board').val()});
         return false;
     });
 });
 
-document.getElementById("copyButton").addEventListener("click", function () {
+document.getElementById("copyButton").addEventListener("click", function() {
     copyToClipboard(document.getElementById("board"));
 });
 
@@ -59,7 +58,7 @@ function copyToClipboard(elem) {
     var currentFocus = document.activeElement;
     target.focus();
     target.setSelectionRange(0, target.value.length);
-
+    
     // copy the selection
     var succeed;
     try {
@@ -71,7 +70,7 @@ function copyToClipboard(elem) {
     if (currentFocus && typeof currentFocus.focus === "function") {
         currentFocus.focus();
     }
-
+    
     if (isInput) {
         // restore prior selection
         elem.setSelectionRange(origSelectionStart, origSelectionEnd);
@@ -90,9 +89,9 @@ var mo = now.getMonth()
 var yyyy = now.getFullYear()
 var datetime = hh + '' + mm + '-' + mo + '-' + da + '-' + yyyy;
 var container = document.querySelector('textarea');
-var anchor = document.querySelector('a');
+var anchor = document.getElementById("downloadButton");
 
-anchor.onclick = function () {
+anchor.onclick = function() {
     anchor.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(container.value);
     anchor.download = 'clippy-' + datetime + '.txt';
 };

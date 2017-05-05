@@ -1,0 +1,53 @@
+html,
+body {
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #e1f5fe;
+}
+
+header {
+    margin-top: -50px;
+    height: 50px;
+}
+
+textarea {
+    background-color: #FFFFFF;
+    font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+    color: #212121;
+    width: 100%;
+    /* Firefox */
+    height: -moz-calc(100% - 250px);
+    /* WebKit */
+    height: -webkit-calc(100% - 250px);
+    /* Opera */
+    height: -o-calc(100% - 250px);
+    /* Standard */
+    height: calc(100% - 250px);
+}
+
+.wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.icon-block {
+    padding: 0 15px;
+}
+
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+.main-panel {
+    min-height: 100%;
+}
+
+.page-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
