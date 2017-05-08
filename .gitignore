@@ -1,3 +1,4 @@
 cenv/
 .idea/
 sftp-config.json
+*.pyc

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session
 from flask_socketio import SocketIO, Namespace, emit, join_room, leave_room, \
     close_room, rooms, disconnect
-from room import RoomGenerator
+from room import Room
 
 
 async_mode = None
